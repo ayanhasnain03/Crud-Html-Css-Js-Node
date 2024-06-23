@@ -10,7 +10,7 @@ connectDB();
 // Setup __dirname for ES Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-import todoRoute from "./routes/todoRoute.js";
+import todoRoutes from "./routes/todoRoute.js";
 const app = express();
 // Set view engine to EJS
 app.set("view engine", "ejs");
@@ -20,9 +20,9 @@ app.use(bodyParse.json());
 app.use(bodyParse.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", todoRoute);
+app.use("/todos", todoRoutes);
 app.get("/", (req, res) => {
-  res.render("index");
+  res.send("Welcome to the Todo App");
 });
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server running on port ${process.env.PORT}`);
